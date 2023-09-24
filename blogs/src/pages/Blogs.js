@@ -1,7 +1,11 @@
+import BlogsList from "../components/BlogsList";
+
 const BlogPage= () => {
 
-    return(
-        <h2>Blogs Page works</h2>
+    return (
+        <>
+           <BlogsList />
+        </>
     );
 };
 

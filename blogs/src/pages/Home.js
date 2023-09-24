@@ -1,7 +1,18 @@
+import { useSelector } from "react-redux";
+import BlogsList from "../components/BlogsList";
+import Carousel from "../ui/Carousel";
+
+
 const HomePage= () =>{
+
+    const allPosts= useSelector((state) =>  state.post.posts);
+
     return (
-        <h2>Home page works</h2>
-    )
+        <>
+            <Carousel items={allPosts}/>
+           <BlogsList/>
+        </>
+    );
 };
 
 export default HomePage;
