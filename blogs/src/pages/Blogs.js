@@ -1,6 +1,6 @@
 import BlogsList from "../components/BlogsList";
 
-const BlogPage= () => {
+const BlogsPage= () => {
 
     return (
         <>
@@ -9,4 +9,4 @@ const BlogPage= () => {
     );
 };
 
-export default BlogPage;
+export default BlogsPage;

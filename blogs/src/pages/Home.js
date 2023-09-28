@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import BlogsList from "../components/BlogsList";
-import Carousel from "../ui/Carousel";
+import Carousel from "../Layout/Carousel";
 
 
 const HomePage= () =>{

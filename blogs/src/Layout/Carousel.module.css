@@ -12,14 +12,11 @@
   }
   
   .carousel-item {
-    /* flex: 0 0 100%; */
-    display: none;
     width: 0;
   }
 
   
   .carousel-item.active-left {
-    display: block;
     width: 100%;
     animation: slideleft 0.5s ease forwards;
   }
@@ -33,7 +30,6 @@
     }
   }
   .carousel-item.active-right {
-    display: block;
     width: 100%;
     animation: slideright 0.5s ease forwards;
   }
