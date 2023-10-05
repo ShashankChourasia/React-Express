@@ -1,60 +1,119 @@
 import { useRef, useState } from "react";
 
+import { debounce } from "lodash";
+
 import Input from "../ui/input";
 import BlogHighlighter from "../Layout/BlogHiglighter";
+import { useNavigate } from "react-router-dom";
 
+const BlogForm = ({id= 0, title= '', author= '', description:blogDescription= '' , imagePath='', onAddPost, buttonText}) => {
+//   const { title, author, description: blogDescription, imagePath } = props.post;
+  const titleRef = useRef();
+  const authorRef = useRef();
+  const imagePathRef = useRef();
 
-const BlogForm= (props) => {
-    const titleRef= useRef();
-    const [description, setDescription]= useState();
+  const [description, setDescription] = useState(blogDescription);
+  const [error, setError] = useState();
 
-    const handleDescription= (event)=> {
-        setDescription(event.target.value);
-    };
+  const navigate = useNavigate();
 
-    const handleForm= (event) => {
-        event.preventDefault();
-        console.log('Success');}
+  const handleDescription = debounce((event) => {
+    setDescription(event.target.value);
+  }, 500);
 
-    return(
+  const handleForm = (event) => {
+    event.preventDefault();
+    const enteredTitle = titleRef.current.value;
+    const enteredAuthor = authorRef.current.value;
+    const enteredImagePath = imagePathRef.current.value;
 
-        <div className="row gx-5">
-            <form onSubmit={handleForm} className="col-6">
-                <Input 
-                    ref={titleRef}
-                    label='Blog Title'
-                    input={{
-                        id:'amount_'+ props.id,
-                        type: 'text',
+    if (
+      enteredTitle.trim().length === 0 ||
+      enteredAuthor.trim().length === 0 ||
+      enteredImagePath.trim().length === 0 ||
+      description.trim().length === 0
+    ) {
+      setError({
+        title: "Invalid Input",
+        message: "Please Enter non empty Title, Author, ImagePath, Description",
+      });
+      return;
+    }
 
-                    }} />
-                <div className="mb-3">
-                    <label htmlFor="blog-description" className="form-label">Create Blog</label>
-                    <textarea onChange={handleDescription} className="form-control" id="blog-description" rows="10"></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-            <div className="col-6 border border-info p-0">
-                {description && description.length > 0 && <BlogHighlighter description={description} />}
-            </div>
+    onAddPost(enteredTitle, enteredAuthor, enteredImagePath, description);
+    titleRef.current.value = "";
+    authorRef.current.value = "";
+    imagePathRef.current.value = "";
+    setDescription("");
+    setError(null);
+
+    navigate('../..');
+  };
+
+  const cancelHandler= () => {
+    navigate('..');
+  }
+
+  return (
+    <div key={id} className="row gx-5">
+      <form onSubmit={handleForm} className="col-6">
+        <div>
+          <h5>{error?.title}</h5>
+          <p>{error?.message}</p>
         </div>
-        // <form>
-        //     <div className="mb-3">
-        //         <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-        //         <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-        //         <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-        //     </div>
-        //     <div className="mb-3">
-        //         <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-        //         <input type="password" className="form-control" id="exampleInputPassword1" />
-        //     </div>
-        //     <div className="mb-3 form-check">
-        //         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-        //         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-        //     </div>
-        //     <button type="submit" className="btn btn-primary">Submit</button>
-        // </form>
-    );
+        <Input
+          ref={titleRef}
+          label="Blog Title"
+          input={{
+            id: "title_" + id,
+            type: "text",
+            defaultValue: title,
+          }}
+        />
+        <div className="mb-3">
+          <label htmlFor="blog-description" className="form-label">
+            Create Blog
+          </label>
+          <textarea
+            onChange={handleDescription}
+            className="form-control"
+            id="blog-description"
+            rows="6"
+            defaultValue={description}
+          ></textarea>
+        </div>
+        <Input
+          ref={authorRef}
+          label="Author Name"
+          input={{
+            id: "author_" + id,
+            type: "text",
+            defaultValue: author,
+          }}
+        />
+        <Input
+          ref={imagePathRef}
+          label="Image path"
+          input={{
+            id: "imagePathRef_" + id,
+            type: "text",
+            defaultValue: imagePath,
+          }}
+        />
+        <button type="submit" className="btn btn-primary me-3">
+          {buttonText}
+        </button>
+        <button onClick={cancelHandler} type="button" className="btn btn-warning">
+          Cancel
+        </button>
+      </form>
+      <div className="col-6 border border-info p-0">
+        {description && description.length > 0 && (
+          <BlogHighlighter description={description} />
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default BlogForm;
