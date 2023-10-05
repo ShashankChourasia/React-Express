@@ -6,8 +6,15 @@ import Input from "../ui/input";
 import BlogHighlighter from "../Layout/BlogHiglighter";
 import { useNavigate } from "react-router-dom";
 
-const BlogForm = ({id= 0, title= '', author= '', description:blogDescription= '' , imagePath='', onAddPost, buttonText}) => {
-//   const { title, author, description: blogDescription, imagePath } = props.post;
+const BlogForm = ({
+  id = 0,
+  title = "",
+  author = "",
+  description: blogDescription = "",
+  imagePath = "",
+  onAddPost,
+  buttonText,
+}) => {
   const titleRef = useRef();
   const authorRef = useRef();
   const imagePathRef = useRef();
@@ -47,12 +54,12 @@ const BlogForm = ({id= 0, title= '', author= '', description:blogDescription= ''
     setDescription("");
     setError(null);
 
-    navigate('../..');
+    navigate("/");
   };
 
-  const cancelHandler= () => {
-    navigate('..');
-  }
+  const cancelHandler = () => {
+    navigate("..");
+  };
 
   return (
     <div key={id} className="row gx-5">
@@ -103,7 +110,11 @@ const BlogForm = ({id= 0, title= '', author= '', description:blogDescription= ''
         <button type="submit" className="btn btn-primary me-3">
           {buttonText}
         </button>
-        <button onClick={cancelHandler} type="button" className="btn btn-warning">
+        <button
+          onClick={cancelHandler}
+          type="button"
+          className="btn btn-warning"
+        >
           Cancel
         </button>
       </form>
