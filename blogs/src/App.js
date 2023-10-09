@@ -8,12 +8,18 @@ import BlogDetailPage from "./pages/BlogDetail";
 import EditBlogPage from "./pages/Editblog";
 import NewBlogPage from "./pages/NewBlog";
 import ErrorPage from "./pages/Error";
+import AuthenticationPage, {
+  action as authAction,
+} from "./pages/Authentication";
+import { tokenLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    id: "root",
+    loader: tokenLoader,
     children: [
       {
         index: true,
@@ -21,7 +27,6 @@ const router = createBrowserRouter([
       },
       {
         path: "blogs",
-        // element: <BlogsPage />,
         children: [
           {
             index: true,
@@ -41,10 +46,15 @@ const router = createBrowserRouter([
             ],
           },
           {
-            path: 'new',
+            path: "new",
             element: <NewBlogPage />,
           },
         ],
+      },
+      {
+        path: "auth",
+        element: <AuthenticationPage />,
+        action: authAction,
       },
     ],
   },
