@@ -10,7 +10,7 @@ const BlogDetailPage = () => {
 
   const { blogId } = useParams();
 
-  const activeBlog = allPosts.find((blog) => blog.id === Number(blogId));
+  const activeBlog = allPosts.find((blog) => blog.id === blogId);
 
   useEffect(() => {
     if (!activeBlog) {

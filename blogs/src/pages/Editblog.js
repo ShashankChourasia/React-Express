@@ -1,30 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postActions } from "../store/post-slice";
 
 import BlogForm from "../components/BlogForm";
 import { useParams } from "react-router-dom";
-
-const date = new Date();
+import { updatePostData } from "../store/post-actions";
 
 const EditBlogPage = () => {
   const { blogId } = useParams();
   const { id, title, author, description, imagePath } = useSelector((state) =>
-    state.post.posts.find((blog) => blog.id === Number(blogId))
+    state.post.posts.find((blog) => blog.id === blogId)
   );
   const dispatch = useDispatch();
 
   const handleAddPost = (title, author, imagePath, description) => {
     const updatedPost = {
-      id: +blogId,
+      id: blogId,
       title,
       author,
       imagePath,
       description,
-      dateCreated: `${date.getDate()}/${
-        date.getMonth() + 1
-      }/${date.getFullYear()}`,
     };
-    dispatch(postActions.updatePost(updatedPost));
+    dispatch(updatePostData(updatedPost));
   };
 
   return (

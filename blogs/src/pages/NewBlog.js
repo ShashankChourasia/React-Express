@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
-import { postActions } from "../store/post-slice";
 
 import BlogForm from "../components/BlogForm";
-// import { useParams } from "react-router-dom";
+import { createPost } from "../store/post-actions";
 
 const date = new Date();
 
@@ -11,7 +10,6 @@ const NewBlogPage = () => {
 
   const handleAddPost = (title, author, imagePath, description) => {
     const updatedPost = {
-      id: Math.floor(Math.random() * 100),
       title,
       author,
       imagePath,
@@ -20,7 +18,7 @@ const NewBlogPage = () => {
         date.getMonth() + 1
       }/${date.getFullYear()}`,
     };
-    dispatch(postActions.createPost(updatedPost));
+    dispatch(createPost(updatedPost));
   };
 
   return (

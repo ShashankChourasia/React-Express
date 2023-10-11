@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+// import { getAuthToken } from "../util/auth";
 
 const Header = () => {
+  // const token= getAuthToken();
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container">
