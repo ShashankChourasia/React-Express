@@ -1,8 +1,30 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const BlogsList = () => {
+const BlogsList = ({fullList= 3}) => {
   const allPosts = useSelector((state) => state.post.posts);
+
+  const [showMore, setShowMore] = useState(fullList);
+
+  const content = allPosts <= showMore ? allPosts : allPosts.slice(0, showMore);
+
+  const handleShowMore = () => {
+    if(allPosts.length > showMore) {setShowMore(prevState => prevState + 3)};
+  };
+
+  const handleShowLess = () => {
+    if (showMore > 3) {
+      if (showMore % 3 === 0) {
+        setShowMore(prevState => prevState - 3);
+      } else if(showMore % 3 === 2){
+        setShowMore(prevState => Math.max(3, prevState - 2));
+      }
+      else{
+        setShowMore(prevState => Math.max(3, prevState - 1));
+      }
+    }
+  };
 
   function truncateText(text, maxLength) {
     if (text.length > maxLength) {
@@ -15,14 +37,14 @@ const BlogsList = () => {
   return (
     <section className="container py-5">
       <h1>All Blogs</h1>
-      <div className="row">
-        {allPosts.length === 0 && (
+      <div className="row px-0">
+        {content.length === 0 && (
           <h3 className="text-secondary">No Blogs available.</h3>
         )}
-        {allPosts.length >= 0 &&
-          allPosts?.map((post) => (
+        {content.length > 0 &&
+          content.map((post) => (
             <div className="col-12 col-md-6 col-lg-4" key={post.id}>
-              <div className="card my-2">
+              <div className="card m-1">
                 <Link
                   to={`/blogs/${post.id}`}
                   className="card-body"
@@ -51,6 +73,18 @@ const BlogsList = () => {
               </div>
             </div>
           ))}
+      </div>
+      <div className="d-flex justify-content-center">
+        {
+          allPosts.length > showMore && <button className="btn btn-success mt-3 mx-2" type="button" onClick={handleShowMore}>
+            Show more
+          </button>
+        }
+        {
+          showMore > 3 && <button className="btn btn-warning mt-3 mx-2" type="button" onClick={handleShowLess}>
+            Show less
+          </button>
+        }
       </div>
     </section>
   );

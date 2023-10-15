@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import BlogHighlighter from "../Layout/BlogHiglighter";
 import { useDispatch } from "react-redux";
-import { postActions } from "../store/post-slice";
+import { deletePost } from "../store/post-actions";
 
 const BlogItem = ({ activeBlog }) => {
 
@@ -14,8 +14,8 @@ const BlogItem = ({ activeBlog }) => {
   const { id, title, description, dateCreated, author, imagePath } = activeBlog;
 
   const handleDeletePost = () => {
-    dispatch(postActions.deletePost(id));
-    navigate("/");
+    dispatch(deletePost(id));
+    navigate("..");
   };
 
   return (

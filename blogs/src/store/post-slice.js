@@ -15,19 +15,11 @@ const postSlice = createSlice({
     },
     updatePost(state, action) {
       state.updateStatus = action.payload;
-      // const updatedPost = action.payload;
-      // const currentItemId = updatedPost.id;
-      // const postIndex = state.posts.findIndex(
-      //   (item) => item.id === currentItemId
-      // );
-      // if (postIndex !== -1) {
-      //   state.posts[postIndex] = updatedPost;
-      // }
     },
-    deletePost(state, action) {
-      const postId = action.payload;
-      state.posts = state.posts.filter((post) => post.id !== postId);
-    },
+    // deletePost(state, action) {
+    //   const postId = action.payload;
+    //   state.posts = state.posts.filter((post) => post.id !== postId);
+    // },
   },
 });
 

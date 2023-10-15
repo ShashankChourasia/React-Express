@@ -3,7 +3,7 @@ import BlogsList from "../components/BlogsList";
 const BlogsPage = () => {
   return (
     <>
-      <BlogsList />
+      <BlogsList fullList="8"/>
     </>
   );
 };

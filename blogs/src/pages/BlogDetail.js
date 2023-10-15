@@ -12,11 +12,11 @@ const BlogDetailPage = () => {
 
   const activeBlog = allPosts.find((blog) => blog.id === blogId);
 
-  useEffect(() => {
-    if (!activeBlog) {
-      navigate("/blogs");
-    }
-  });
+//   useEffect(() => {
+//     if (!activeBlog) {
+//       navigate("/blogs");
+//     }
+//   });
 
   return <BlogItem activeBlog={activeBlog} />;
 };
