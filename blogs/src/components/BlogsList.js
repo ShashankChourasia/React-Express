@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const BlogsList = ({fullList= 3}) => {
+const BlogsList = ({ fullList = 3 }) => {
   const allPosts = useSelector((state) => state.post.posts);
 
   const [showMore, setShowMore] = useState(fullList);
@@ -10,18 +10,19 @@ const BlogsList = ({fullList= 3}) => {
   const content = allPosts <= showMore ? allPosts : allPosts.slice(0, showMore);
 
   const handleShowMore = () => {
-    if(allPosts.length > showMore) {setShowMore(prevState => prevState + 3)};
+    if (allPosts.length > showMore) {
+      setShowMore((prevState) => prevState + 3);
+    }
   };
 
   const handleShowLess = () => {
     if (showMore > 3) {
       if (showMore % 3 === 0) {
-        setShowMore(prevState => prevState - 3);
-      } else if(showMore % 3 === 2){
-        setShowMore(prevState => Math.max(3, prevState - 2));
-      }
-      else{
-        setShowMore(prevState => Math.max(3, prevState - 1));
+        setShowMore((prevState) => prevState - 3);
+      } else if (showMore % 3 === 2) {
+        setShowMore((prevState) => Math.max(3, prevState - 2));
+      } else {
+        setShowMore((prevState) => Math.max(3, prevState - 1));
       }
     }
   };
@@ -75,16 +76,24 @@ const BlogsList = ({fullList= 3}) => {
           ))}
       </div>
       <div className="d-flex justify-content-center">
-        {
-          allPosts.length > showMore && <button className="btn btn-success mt-3 mx-2" type="button" onClick={handleShowMore}>
+        {allPosts.length > showMore && (
+          <button
+            className="btn btn-success mt-3 mx-2"
+            type="button"
+            onClick={handleShowMore}
+          >
             Show more
           </button>
-        }
-        {
-          showMore > 3 && <button className="btn btn-warning mt-3 mx-2" type="button" onClick={handleShowLess}>
+        )}
+        {showMore > 3 && (
+          <button
+            className="btn btn-warning mt-3 mx-2"
+            type="button"
+            onClick={handleShowLess}
+          >
             Show less
           </button>
-        }
+        )}
       </div>
     </section>
   );
