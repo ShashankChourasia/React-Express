@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const SearchBar = ({label= ""}) => {
+const SearchBar = ({ label = "" }) => {
   const allPosts = useSelector((state) => state.post.posts);
   const searchBarRef = useRef(null);
 
@@ -30,6 +31,10 @@ const SearchBar = ({label= ""}) => {
     setIsDropdownOpen(true);
   };
 
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
   const content = allPosts
     .filter((post) => {
       if (query === "") {
@@ -40,15 +45,27 @@ const SearchBar = ({label= ""}) => {
       return false;
     })
     .map((post) => (
-      <div className="card p-2" key={post.id}>
-        <h6>{post.title}</h6>
-        <p>{post.author}</p>
-      </div>
+      <Link
+        to={`/blogs/${post.id}`}
+        onClick={closeDropdown}
+        className="card"
+        key={post.id}
+        style={{ textDecoration: "none" }}
+      >
+        <div className="card-body p-2">
+          <h6>{post.title}</h6>
+          <p>{post.author}</p>
+        </div>
+      </Link>
     ));
 
   return (
     <form className="position-relative" role="search" ref={searchBarRef}>
-        {label !== "" && <label htmlFor="search" className="form-label">{label}</label>}
+      {label !== "" && (
+        <label htmlFor="search" className="form-label">
+          {label}
+        </label>
+      )}
       <input
         onChange={handleSearch}
         className="form-control me-2"
