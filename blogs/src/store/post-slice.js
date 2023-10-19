@@ -4,7 +4,6 @@ const postSlice = createSlice({
   name: "post",
   initialState: {
     posts: [],
-    updateStatus: true,
   },
   reducers: {
     replacePosts(state, action) {
@@ -14,12 +13,18 @@ const postSlice = createSlice({
       state.posts.push(action.payload);
     },
     updatePost(state, action) {
-      state.updateStatus = action.payload;
+      const postId= action.payload.id;
+
+      const findPost= state.posts.filter(post => post.id !== postId);
+      if(!findPost) {
+        return
+      }
+      state.posts=[action.payload , ...findPost];
     },
-    // deletePost(state, action) {
-    //   const postId = action.payload;
-    //   state.posts = state.posts.filter((post) => post.id !== postId);
-    // },
+    deletePost(state, action) {
+      const postId = action.payload;
+      state.posts = state.posts.filter((post) => post.id !== postId);
+    },
   },
 });
 

@@ -1,10 +1,12 @@
 import BlogsList from "../components/BlogsList";
+import SearchBar from "../components/SearchBar";
 
 const BlogsPage = () => {
   return (
-    <>
-      <BlogsList fullList="9"/>
-    </>
+    <div className="container my-5">
+      <SearchBar label="Search Blogs"/>
+      <BlogsList fullList="9" />
+    </div>
   );
 };
 

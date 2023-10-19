@@ -51,20 +51,33 @@ export const updatePostData = (post) => {
   return async (dispatch) => {
     dispatch(
       uiActions.showNotification({
-        status: "pending",
+        status: "sending",
         title: "Sending...",
         message: "Sending post data!",
       })
     );
-    const response = await fetch("http://localhost:8080/update-posts", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(post),
-    });
+    try {
+      const response = await fetch("http://localhost:8080/update-posts", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+      });
 
-    if (!response.ok) {
+      if (!response.ok) {
+        throw Error("Could not fetch posts.");
+      }
+      const data = await response.json();
+      dispatch(postActions.updatePost(data));
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          title: "Success!",
+          message: "Post updated successfully!",
+        })
+      );
+    } catch (error) {
       dispatch(
         uiActions.showNotification({
           status: "error",
@@ -72,18 +85,7 @@ export const updatePostData = (post) => {
           message: "Update post failed!",
         })
       );
-      throw Error("Could not fetch posts.");
     }
-    const data = await response.json();
-    dispatch(postActions.updatePost(true));
-    dispatch(
-      uiActions.showNotification({
-        status: "success",
-        title: "Success!",
-        message: "Post updated successfully!",
-      })
-    );
-    return data;
   };
 };
 
@@ -96,15 +98,28 @@ export const createPost = (post) => {
         message: "Sending post data!",
       })
     );
-    const response = await fetch("http://localhost:8080/new-posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(post),
-    });
+    try {
+      const response = await fetch("http://localhost:8080/new-posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+      });
 
-    if (response.status !== 201) {
+      if (response.status !== 201) {
+        throw Error("Could not create new post.");
+      }
+      const data = await response.json();
+      dispatch(postActions.createPost(data));
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          title: "Success!",
+          message: "Post created successfully!",
+        })
+      );
+    } catch (error) {
       dispatch(
         uiActions.showNotification({
           status: "failed",
@@ -112,18 +127,7 @@ export const createPost = (post) => {
           message: "Create post failed!",
         })
       );
-      throw Error("Could not create new post.");
     }
-    const data = await response.json();
-    dispatch(postActions.updatePost(true));
-    dispatch(
-      uiActions.showNotification({
-        status: "success",
-        title: "Success!",
-        message: "Post created successfully!",
-      })
-    );
-    return data;
   };
 };
 
@@ -136,18 +140,30 @@ export const deletePost = (postId) => {
         message: "Deleting post data!",
       })
     );
-    const response = await fetch(
-      "http://localhost:8080/delete-post/" + postId,
-      {
-        method: "Delete",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // body: JSON.stringify(post),
-      }
-    );
+    try {
+      const response = await fetch(
+        "http://localhost:8080/delete-post/" + postId,
+        {
+          method: "Delete",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    if (response.status !== 200) {
+      if (response.status !== 200) {
+        throw Error("Could not delete post.");
+      }
+      
+      dispatch(postActions.deletePost(postId));
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          title: "Success!",
+          message: "Post deleted successfully!",
+        })
+      );
+    } catch (error) {
       dispatch(
         uiActions.showNotification({
           status: "failed",
@@ -155,17 +171,6 @@ export const deletePost = (postId) => {
           message: "Create post failed!",
         })
       );
-      throw Error("Could not create new post.");
     }
-    //   const data = await response.json();
-    dispatch(postActions.updatePost(true));
-    dispatch(
-      uiActions.showNotification({
-        status: "success",
-        title: "Success!",
-        message: "Post created successfully!",
-      })
-    );
-    //   return data;
   };
 };

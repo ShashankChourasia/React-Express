@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import SearchBar from "./SearchBar";
 // import { getAuthToken } from "../util/auth";
 
 const Header = () => {
@@ -59,17 +60,7 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+          <SearchBar />
         </div>
       </div>
     </nav>

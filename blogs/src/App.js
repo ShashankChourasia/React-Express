@@ -12,10 +12,9 @@ import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication";
 import { tokenLoader } from "./util/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchPostData } from "./store/post-actions";
-import { postActions } from "./store/post-slice";
 
 const router = createBrowserRouter([
   {
@@ -66,14 +65,10 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
-  const refreshOnUpdate = useSelector((state) => state.post.updateStatus);
 
   useEffect(() => {
-    if (refreshOnUpdate) {
-      dispatch(fetchPostData());
-    }
-    dispatch(postActions.updatePost(false));
-  }, [dispatch, refreshOnUpdate]);
+    dispatch(fetchPostData());
+  }, [dispatch]);
 
   return <RouterProvider router={router} />;
 }

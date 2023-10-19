@@ -17,7 +17,7 @@ const EditBlogPage = () => {
 
   const dispatch = useDispatch();
 
-  const handleAddPost = (title, author, imagePath, description) => {
+  const handleAddPost = (title, description, author, imagePath) => {
     const updatedPost = {
       id: blogId,
       title,
@@ -30,7 +30,7 @@ const EditBlogPage = () => {
 
   return (
     <div className="container my-5">
-      {notification && (
+      {notification && notification.status === "error" && (
         <Notification
           title={notification.title}
           status={notification.status}

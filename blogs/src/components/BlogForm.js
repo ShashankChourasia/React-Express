@@ -1,13 +1,12 @@
-import { useRef, useState } from "react";
-
-import { debounce } from "lodash";
+import { useState } from "react";
 
 import Input from "../ui/input";
 import BlogHighlighter from "../Layout/BlogHiglighter";
 import { useNavigate } from "react-router-dom";
+import useInput from "../hooks/use-input";
 
 const BlogForm = ({
-  id = 0,
+  id = "",
   title = "",
   author = "",
   description: blogDescription = "",
@@ -15,66 +14,114 @@ const BlogForm = ({
   onAddPost,
   buttonText,
 }) => {
-  const titleRef = useRef();
-  const authorRef = useRef();
-  const imagePathRef = useRef();
-
-  const [description, setDescription] = useState(blogDescription);
   const [error, setError] = useState();
 
   const navigate = useNavigate();
 
-  const handleDescription = debounce((event) => {
-    setDescription(event.target.value);
-  }, 500);
+  const {
+    value: enteredTitle,
+    isValid: enteredTitleIsValid,
+    hasError: titleInputHasError,
+    valueChangeHandler: titleChangedHandler,
+    inputBlurHandler: titleBlurHandler,
+    reset: resetTitleInput,
+  } = useInput((value) => value.trim() !== "", title);
+
+  const {
+    value: enteredDescription,
+    isValid: enteredDescriptionIsValid,
+    hasError: descriptionInputHasError,
+    valueChangeHandler: descriptionChangedHandler,
+    inputBlurHandler: descriptionBlurHandler,
+    reset: resetDescriptionInput,
+  } = useInput((value) => value.trim() !== "", blogDescription);
+
+  const {
+    value: enteredAuthor,
+    isValid: enteredAuthorIsValid,
+    hasError: authorInputHasError,
+    valueChangeHandler: authorChangedHandler,
+    inputBlurHandler: authorBlurHandler,
+    reset: resetAuthorInput,
+  } = useInput((value) => value.trim() !== "", author);
+
+  const {
+    value: enteredImagePath,
+    isValid: enteredImagePathIsValid,
+    hasError: imagePathInputHasError,
+    valueChangeHandler: imagePathChangedHandler,
+    inputBlurHandler: imagePathBlurHandler,
+    reset: resetImagePathInput,
+  } = useInput((value) => value.trim() !== "", imagePath);
+
+  let formIsValid = false;
+
+  if (
+    enteredTitleIsValid &&
+    enteredDescriptionIsValid &&
+    enteredAuthorIsValid &&
+    enteredImagePathIsValid
+  ) {
+    formIsValid = true;
+  }
 
   const handleForm = (event) => {
     event.preventDefault();
-    const enteredTitle = titleRef.current.value;
-    const enteredAuthor = authorRef.current.value;
-    const enteredImagePath = imagePathRef.current.value;
-
-    if (
-      enteredTitle.trim().length === 0 ||
-      enteredAuthor.trim().length === 0 ||
-      enteredImagePath.trim().length === 0 ||
-      description.trim().length === 0
-    ) {
-      setError({
-        title: "Invalid Input",
-        message: "Please Enter non empty Title, Author, ImagePath, Description",
-      });
+    if (!formIsValid) {
+      setError("Form is Invalid");
       return;
     }
 
-    onAddPost(enteredTitle, enteredAuthor, enteredImagePath, description);
-    titleRef.current.value = "";
-    authorRef.current.value = "";
-    imagePathRef.current.value = "";
-    setDescription("");
-    setError(null);
+    onAddPost(
+      enteredTitle,
+      enteredDescription,
+      enteredAuthor,
+      enteredImagePath
+    );
 
-    navigate("/");
+    resetTitleInput();
+    resetDescriptionInput();
+    resetAuthorInput();
+    resetImagePathInput();
+    // navigate("/");
   };
 
   const cancelHandler = () => {
     navigate("..");
   };
 
+  const titleInputClasses = titleInputHasError
+    ? "form-control border border-danger bg-danger bg-opacity-10"
+    : "form-control";
+
+  const descriptionInputClasses = descriptionInputHasError
+    ? "form-control border border-danger bg-danger bg-opacity-10"
+    : "form-control";
+
+  const authorInputClasses = authorInputHasError
+    ? "form-control border border-danger bg-danger bg-opacity-10"
+    : "form-control";
+
+  const imagePathInputClasses = imagePathInputHasError
+    ? "form-control border border-danger bg-danger bg-opacity-10"
+    : "form-control";
+
   return (
     <div key={id} className="row gx-5">
       <form onSubmit={handleForm} className="col-6">
         <div>
-          <h5>{error?.title}</h5>
-          <p>{error?.message}</p>
+          <h5>{error}</h5>
+          {/* <p>{error?.message}</p> */}
         </div>
         <Input
-          ref={titleRef}
           label="Blog Title"
           input={{
+            className: titleInputClasses,
             id: "title_" + id,
             type: "text",
-            defaultValue: title,
+            value: enteredTitle,
+            onChange: titleChangedHandler,
+            onBlur: titleBlurHandler,
           }}
         />
         <div className="mb-3">
@@ -82,29 +129,34 @@ const BlogForm = ({
             Create Blog
           </label>
           <textarea
-            onChange={handleDescription}
-            className="form-control"
+            className={descriptionInputClasses}
             id="blog-description"
             rows="6"
-            defaultValue={description}
+            value={enteredDescription}
+            onChange={descriptionChangedHandler}
+            onBlur={descriptionBlurHandler}
           ></textarea>
         </div>
         <Input
-          ref={authorRef}
           label="Author Name"
           input={{
+            className: authorInputClasses,
             id: "author_" + id,
             type: "text",
-            defaultValue: author,
+            value: enteredAuthor,
+            onChange: authorChangedHandler,
+            onBlur: authorBlurHandler,
           }}
         />
         <Input
-          ref={imagePathRef}
           label="Image path"
           input={{
+            className: imagePathInputClasses,
             id: "imagePathRef_" + id,
             type: "text",
-            defaultValue: imagePath,
+            value: enteredImagePath,
+            onChange: imagePathChangedHandler,
+            onBlur: imagePathBlurHandler,
           }}
         />
         <button type="submit" className="btn btn-primary me-3">
@@ -119,8 +171,8 @@ const BlogForm = ({
         </button>
       </form>
       <div className="col-6 border border-info p-0">
-        {description && description.length > 0 && (
-          <BlogHighlighter description={description} />
+        {enteredDescription && enteredDescription.length > 0 && (
+          <BlogHighlighter description={enteredDescription} />
         )}
       </div>
     </div>

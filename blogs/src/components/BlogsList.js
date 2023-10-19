@@ -44,8 +44,8 @@ const BlogsList = ({ fullList = 3 }) => {
         )}
         {content.length > 0 &&
           content.map((post) => (
-            <div className="col-12 col-md-6 col-lg-4" key={post.id}>
-              <div className="card m-1">
+            <div className="col-12 col-md-6 col-lg-4 p-0" key={post.id}>
+              <div className="card m-2">
                 <Link
                   to={`/blogs/${post.id}`}
                   className="card-body"
