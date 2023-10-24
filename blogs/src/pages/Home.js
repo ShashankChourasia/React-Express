@@ -3,18 +3,18 @@ import BlogsList from "../components/BlogsList";
 import Carousel from "../Layout/Carousel";
 import ErrorModal from "../ui/ErrorModal";
 import { uiActions } from "../store/ui-slice";
+import ListWithFilter from "../components/ListWithFilter";
 
 const HomePage = () => {
-
-   const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.post.posts);
   const notification = useSelector((state) => state?.ui.notification);
 
-  const loading= notification?.status === "loading";
+  const loading = notification?.status === "loading";
 
   const handleConfirm = () => {
     dispatch(uiActions.resetNotification(null));
-  }
+  };
 
   return (
     <>
@@ -26,6 +26,7 @@ const HomePage = () => {
         />
       )}
       <Carousel items={allPosts} />
+      <ListWithFilter />
       <BlogsList />
     </>
   );

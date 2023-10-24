@@ -48,7 +48,7 @@ const SearchBar = ({ label = "" }) => {
       <Link
         to={`/blogs/${post.id}`}
         onClick={closeDropdown}
-        className="card"
+        className="card rounded-0"
         key={post.id}
         style={{ textDecoration: "none" }}
       >
@@ -68,9 +68,9 @@ const SearchBar = ({ label = "" }) => {
       )}
       <input
         onChange={handleSearch}
-        className="form-control me-2"
+        className="form-control me-2 shadow-sm"
         type="search"
-        placeholder="Search"
+        placeholder="Search by title..."
         aria-label="Search"
         id="search"
       />

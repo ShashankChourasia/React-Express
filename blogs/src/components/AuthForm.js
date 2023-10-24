@@ -34,6 +34,7 @@ const AuthForm = () => {
           input={{
             id: "name",
             type: "text",
+            className: "form-control",
             name: "name",
             required: true,
             placeholder: "Enter your name...",
@@ -44,6 +45,7 @@ const AuthForm = () => {
           input={{
             id: "password",
             type: "password",
+            className: "form-control",
             name: "password",
             required: true,
             placeholder: "Enter password",

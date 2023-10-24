@@ -59,6 +59,16 @@ const Header = () => {
                 New Blog
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                to="/auth"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                Login/Signup
+              </NavLink>
+            </li>
           </ul>
           <SearchBar />
         </div>
