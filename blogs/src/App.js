@@ -11,10 +11,11 @@ import ErrorPage from "./pages/Error";
 import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication";
-import { tokenLoader } from "./util/auth";
+import { checkAuthLoader, tokenLoader } from "./util/auth";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchPostData } from "./store/post-actions";
+import { action as logoutAction } from "./pages/Logout";
 
 const router = createBrowserRouter([
   {
@@ -45,12 +46,14 @@ const router = createBrowserRouter([
               {
                 path: "edit",
                 element: <EditBlogPage />,
+                loader: checkAuthLoader
               },
             ],
           },
           {
             path: "new",
             element: <NewBlogPage />,
+            loader: checkAuthLoader,
           },
         ],
       },
@@ -58,6 +61,10 @@ const router = createBrowserRouter([
         path: "auth",
         element: <AuthenticationPage />,
         action: authAction,
+      },
+      {
+        path: "logout",
+        action: logoutAction,
       },
     ],
   },

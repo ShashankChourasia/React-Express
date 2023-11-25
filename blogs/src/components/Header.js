@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Form, NavLink, useRouteLoaderData } from "react-router-dom";
 import SearchBar from "./SearchBar";
 // import { getAuthToken } from "../util/auth";
 
 const Header = () => {
   const [toggle, setToggle]= useState(false);
+
+  const token= useRouteLoaderData('root');
 
   const handleToggle= () => {
     setToggle(tog => !tog);
@@ -59,7 +61,7 @@ const Header = () => {
                 New Blog
               </NavLink>
             </li>
-            <li className="nav-item">
+            {!token && <li className="nav-item">
               <NavLink
                 to="/auth"
                 className={({ isActive }) =>
@@ -68,7 +70,12 @@ const Header = () => {
               >
                 Login/Signup
               </NavLink>
-            </li>
+            </li>}
+            {token && <li>
+              <Form action="/logout" method="post">
+                <button className="btn btn-light">Logout</button>
+              </Form>
+            </li>}
           </ul>
           <SearchBar />
         </div>

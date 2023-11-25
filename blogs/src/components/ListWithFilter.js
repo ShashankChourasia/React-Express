@@ -3,7 +3,7 @@ import { postActions } from "../store/post-slice";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const ListWithFilter = ({showCards= 3}) => {
+const ListWithFilter = ({showCards= 5}) => {
   const dispatch = useDispatch();
   const postsToDisplay = useSelector((state) => state.post.filteredPosts);
   const [active, setActive] = useState("Today");
@@ -65,7 +65,7 @@ const ListWithFilter = ({showCards= 3}) => {
           postsToDisplay.slice(0, showCards).map((item) => (
             <Link
               to={`/blogs/${item.id}`}
-              className="card-body shadow"
+              className="card-body shadow-sm"
               key={item.id}
               style={{ textDecoration: "none" }}
             >

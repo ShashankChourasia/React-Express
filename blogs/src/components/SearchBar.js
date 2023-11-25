@@ -73,6 +73,7 @@ const SearchBar = ({ label = "" }) => {
         placeholder="Search by title..."
         aria-label="Search"
         id="search"
+        autoComplete="Search-blog"
       />
       {isDropdownOpen && (
         <div
