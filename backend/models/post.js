@@ -7,7 +7,7 @@ const postSchema = new Schema({
   description: { type: String, required: true },
   imagePath: { type: String, required: true },
   author: { type: String, required: true },
-  creator: { type: String, required: true },
+  authorId: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
 });
 
 

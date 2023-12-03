@@ -9,7 +9,7 @@ app.use("users", usersRoutes);
 
 mongoose
   .connect(
-    ""
+    "mongodb+srv://shashankchourasia1706:9bivZexGyodpwdKT@cluster0.7dp9klx.mongodb.net/blogs?retryWrites=true&w=majority"
   )
   .then(() => {
     app.listen(8080);
