@@ -15,9 +15,11 @@
     width: 0;
   }
 
-  
-  .carousel-item.active-left {
+  .active {
     width: 100%;
+  }
+
+  .carousel-item.active-left {
     animation: slideleft 0.5s ease forwards;
   }
 
@@ -30,7 +32,6 @@
     }
   }
   .carousel-item.active-right {
-    width: 100%;
     animation: slideright 0.5s ease forwards;
   }
 

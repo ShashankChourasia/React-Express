@@ -4,7 +4,7 @@ import BlogForm from "../components/BlogForm";
 import { createPost } from "../store/post-actions";
 import Notification from "../ui/Notification";
 
-const date = new Date();
+// const date = new Date();
 
 const NewBlogPage = () => {
   const dispatch = useDispatch();
@@ -16,9 +16,9 @@ const NewBlogPage = () => {
       description,
       author,
       imagePath,
-      dateCreated: `${date.getDate()}/${
-        date.getMonth() + 1
-      }/${date.getFullYear()}`,
+      // dateCreated: `${date.getDate()}/${
+      //   date.getMonth() + 1
+      // }/${date.getFullYear()}`,
     };
     dispatch(createPost(updatedPost));
   };
@@ -32,10 +32,7 @@ const NewBlogPage = () => {
           message={notification.message}
         />
       )}
-      <BlogForm
-        buttonText="Create Blog"
-        onAddPost={handleAddPost}
-      />
+      <BlogForm buttonText="Create Blog" onAddPost={handleAddPost} />
     </div>
   );
 };

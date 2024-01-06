@@ -29,7 +29,7 @@ const AuthForm = () => {
         )}
         {data && data.message && <p>{data.message}</p>}
         {data}
-        <Input
+        {!isLogin && <Input
           label="Enter Name"
           input={{
             id: "name",
@@ -38,6 +38,17 @@ const AuthForm = () => {
             name: "name",
             required: true,
             placeholder: "Enter your name...",
+          }}
+        />}
+        <Input
+          label="Enter Email"
+          input={{
+            id: "email",
+            type: "email",
+            className: "form-control",
+            name: "email",
+            required: true,
+            placeholder: "Enter your email...",
           }}
         />
         <Input

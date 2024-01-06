@@ -1,15 +1,35 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
+
+const postsRoutes = require("./routes/posts-routes");
+const usersRoutes = require("./routes/users-routes");
+
+const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 
-app.use("blogs", blogsRoutes);
-app.use("users", usersRoutes);
+app.use("/posts", postsRoutes);
+app.use("/users", usersRoutes);
+
+app.use((req, res, next) => {
+  const error = new HttpError("Could not find this route.", 404);
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  if (res.headerSent) {
+    return next(error);
+  }
+  res.status(error.code || 500);
+  res.json({ message: error.message || "An unknown error occurred!" });
+});
 
 mongoose
   .connect(
-    "mongodb+srv://shashankchourasia1706:9bivZexGyodpwdKT@cluster0.7dp9klx.mongodb.net/blogs?retryWrites=true&w=majority"
+    "mongodb+srv://shashankchourasia1706:9bivZexGyodpwdKT@cluster0.7dp9klx.mongodb.net/posts?retryWrites=true&w=majority"
   )
   .then(() => {
     app.listen(8080);

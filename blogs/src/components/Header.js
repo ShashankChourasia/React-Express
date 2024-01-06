@@ -36,6 +36,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
+                end
               >
                 Home
               </NavLink>

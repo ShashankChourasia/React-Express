@@ -83,7 +83,7 @@ const BlogForm = ({
     resetDescriptionInput();
     resetAuthorInput();
     resetImagePathInput();
-    // navigate("/");
+    navigate("/");
   };
 
   const cancelHandler = () => {

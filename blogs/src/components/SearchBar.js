@@ -39,7 +39,7 @@ const SearchBar = ({ label = "" }) => {
     .filter((post) => {
       if (query === "") {
         return post;
-      } else if (post?.title.toLowerCase().includes(query?.toLowerCase())) {
+      } else if (post?.title?.toLowerCase().includes(query?.toLowerCase())) {
         return post;
       }
       return false;
@@ -74,6 +74,7 @@ const SearchBar = ({ label = "" }) => {
         aria-label="Search"
         id="search"
         autoComplete="Search-blog"
+        name="search-blog"
       />
       {isDropdownOpen && (
         <div

@@ -44,25 +44,13 @@ const postSlice = createSlice({
     filterPosts(state, action) {
       const selectedOption = action.payload;
 
-      // const currentDate = new Date();
-      // const sevenDaysAgo = new Date(currentDate);
-      // sevenDaysAgo.setDate(currentDate.getDate() - 7);
-
-      // const formattedDateToday = `${currentDate.getDate()}/${
-      //   currentDate.getMonth() + 1
-      // }/${currentDate.getFullYear()}`;
-
-      // const formattedDateWeek = `${sevenDaysAgo.getDate()}/${
-      //   sevenDaysAgo.getMonth() + 1
-      // }/${sevenDaysAgo.getFullYear()}`;
-
       if (selectedOption === "Today") {
         state.filteredPosts = state?.posts?.filter(
-          (post) => post.dateCreated >= formattedDateToday
+          (post) => post.dateCreated <= formattedDateToday
         );
       } else if (selectedOption === "This Week") {
         state.filteredPosts = state.posts.filter(
-          (post) => post.dateCreated >= formattedDateWeek
+          (post) => post.dateCreated <= formattedDateWeek
         );
       } else {
         state.filteredPosts = state.posts;

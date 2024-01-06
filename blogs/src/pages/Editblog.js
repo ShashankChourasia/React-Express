@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import BlogForm from "../components/BlogForm";
 import { useParams } from "react-router-dom";
 import { updatePostData } from "../store/post-actions";
-import Notification from "../ui/Notification";
 
 const EditBlogPage = () => {
   const { blogId } = useParams();
@@ -12,8 +11,6 @@ const EditBlogPage = () => {
   );
 
   const { id, title, author, description, imagePath } = selectedBlog || {};
-
-  const notification = useSelector((state) => state.ui.notification);
 
   const dispatch = useDispatch();
 
@@ -30,13 +27,7 @@ const EditBlogPage = () => {
 
   return (
     <div className="container my-5">
-      {notification && notification.status === "error" && (
-        <Notification
-          title={notification.title}
-          status={notification.status}
-          message={notification.message}
-        />
-      )}
+      
       <BlogForm
         id={id}
         title={title}

@@ -27,7 +27,7 @@ const BlogsList = ({ fullList = 3 }) => {
     }
   };
 
-  function truncateText(text, maxLength) {
+  const truncateText= (text, maxLength) => {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + "...";
     } else {
@@ -59,7 +59,7 @@ const BlogsList = ({ fullList = 3 }) => {
                     alt={post.author}
                   />
                   <p className="card-text mt-3">
-                    {post.description.length >= 20
+                    {post?.description?.length >= 20
                       ? truncateText(post.description, 20)
                       : post.description}
                   </p>
@@ -76,7 +76,7 @@ const BlogsList = ({ fullList = 3 }) => {
           ))}
       </div>
       <div className="d-flex justify-content-center">
-        {allPosts.length > showMore && (
+        {allPosts && allPosts.length > showMore && (
           <button
             className="btn btn-success mt-3 mx-2"
             type="button"
@@ -85,7 +85,7 @@ const BlogsList = ({ fullList = 3 }) => {
             Show more
           </button>
         )}
-        {allPosts.length > 0 && showMore > 3 && (
+        {allPosts && allPosts.length > 3 && showMore > 3 && (
           <button
             className="btn btn-warning mt-3 mx-2"
             type="button"

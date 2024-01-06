@@ -1,5 +1,8 @@
+import { tokenLoader } from "../util/auth";
 import { postActions } from "./post-slice";
 import { uiActions } from "./ui-slice";
+
+const token = tokenLoader();
 
 export const fetchPostData = () => {
   return async (dispatch) => {
@@ -17,7 +20,6 @@ export const fetchPostData = () => {
         throw Error("Could not fetch posts.");
       }
       const data = await response.json();
-      //   console.log(data);
       return data;
     };
 
@@ -25,7 +27,7 @@ export const fetchPostData = () => {
       const postData = await fetchData();
       dispatch(
         postActions.replacePosts({
-          posts: postData || [],
+          posts: postData.posts || [],
         })
       );
       dispatch(
@@ -57,19 +59,22 @@ export const updatePostData = (post) => {
       })
     );
     try {
-      const response = await fetch("http://localhost:8080/update-posts", {
+      console.log(token);
+      const {id, ...updatedPost}= post;
+      const response = await fetch(`http://localhost:8080/posts/edit-posts/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(post),
+        body: JSON.stringify(updatedPost),
       });
 
       if (!response.ok) {
         throw Error("Could not fetch posts.");
       }
       const data = await response.json();
-      dispatch(postActions.updatePost(data));
+      dispatch(postActions.updatePost(data.post));
       dispatch(
         uiActions.showNotification({
           status: "success",
@@ -99,10 +104,12 @@ export const createPost = (post) => {
       })
     );
     try {
-      const response = await fetch("http://localhost:8080/new-posts", {
+      console.log(token);
+      const response = await fetch("http://localhost:8080/posts/new-posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify(post),
       });
@@ -111,7 +118,7 @@ export const createPost = (post) => {
         throw Error("Could not create new post.");
       }
       const data = await response.json();
-      dispatch(postActions.createPost(data));
+      dispatch(postActions.createPost(data.post));
       dispatch(
         uiActions.showNotification({
           status: "success",
@@ -142,11 +149,12 @@ export const deletePost = (postId) => {
     );
     try {
       const response = await fetch(
-        "http://localhost:8080/delete-post/" + postId,
+        "http://localhost:8080/posts/" + postId,
         {
           method: "Delete",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
         }
       );
@@ -154,7 +162,7 @@ export const deletePost = (postId) => {
       if (response.status !== 200) {
         throw Error("Could not delete post.");
       }
-      
+
       dispatch(postActions.deletePost(postId));
       dispatch(
         uiActions.showNotification({

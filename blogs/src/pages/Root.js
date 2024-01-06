@@ -24,7 +24,7 @@ const RootLayout = () => {
     }, tokenDuration);
   
     return () => {
-      clearTimeout(logoutTimer); // This clears the timer when the component unmounts or when the dependencies change.
+      clearTimeout(logoutTimer); 
     };
   }, [token, submit]);
   

@@ -21,17 +21,19 @@ export async function action({ request }) {
   }
 
   const data = await request.formData();
-  const user = {
-    name: data.get("name"),
-    password: data.get("password"),
-  };
+  let user;
 
   const errors = [
     ["Please check your name and password"]
   ];
 
   if (mode === "signup") {
-    const response = await fetch("http://localhost:8080/" + mode, {
+    user= {
+      name: data.get("name"),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    const response = await fetch("http://localhost:8080/users/" + mode, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,11 +43,23 @@ export async function action({ request }) {
     if (!response.ok) {
       throw json({ message: "Could not create user." }, { status: 500 });
     }
+    const resData = await response.json();
+    console.log(resData);
+    const token = resData.token;
+
+    localStorage.setItem("token", token);
+    const expiration = new Date();
+    expiration.setHours(expiration.getHours() + 1);
+    localStorage.setItem("expiration", expiration.toISOString());
     return redirect("/");
   }
 
   if (mode === "login") {
-    const response = await fetch("http://localhost:8080/" + mode, {
+    user= {
+      email: data.get("email"),
+      password: data.get("password"),
+    }
+    const response = await fetch("http://localhost:8080/users/" + mode, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +79,7 @@ export async function action({ request }) {
 
     const resData = await response.json();
     console.log(resData);
-    const token = resData.jwtToken;
+    const token = resData.token;
 
     localStorage.setItem("token", token);
     const expiration = new Date();
