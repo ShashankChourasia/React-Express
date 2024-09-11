@@ -26,8 +26,8 @@ const HomePage = () => {
         />
       )}
       <Carousel items={allPosts} />
-      <ListWithFilter showCards="3"/>
       <BlogsList />
+      <ListWithFilter showCards="3"/>
     </>
   );
 };

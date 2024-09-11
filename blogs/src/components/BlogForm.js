@@ -4,6 +4,7 @@ import Input from "../ui/input";
 import BlogHighlighter from "../Layout/BlogHiglighter";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/use-input";
+import ImageUpload from "../ui/ImageUpload";
 
 const BlogForm = ({
   id = "",
@@ -15,6 +16,9 @@ const BlogForm = ({
   buttonText,
 }) => {
   const [error, setError] = useState();
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageIsValid, setImageIsValid] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,13 +58,23 @@ const BlogForm = ({
     reset: resetImagePathInput,
   } = useInput((value) => value.trim() !== "", imagePath);
 
+  const addImageHandler = (pickedFile, fileIsValid) => {
+    if (fileIsValid) {
+      setSelectedImage(pickedFile);
+      setImageIsValid(true);
+    } else {
+      setImageIsValid(false);
+    }
+  };
+
   let formIsValid = false;
 
   if (
     enteredTitleIsValid &&
     enteredDescriptionIsValid &&
     enteredAuthorIsValid &&
-    enteredImagePathIsValid
+    enteredImagePathIsValid &&
+    imageIsValid
   ) {
     formIsValid = true;
   }
@@ -76,14 +90,22 @@ const BlogForm = ({
       enteredTitle,
       enteredDescription,
       enteredAuthor,
-      enteredImagePath
+      enteredImagePath,
+      selectedImage
     );
+    // console.log(
+    //   enteredTitle,
+    //   enteredDescription,
+    //   enteredAuthor,
+    //   enteredImagePath,
+    //   selectedImage
+    // );
 
-    resetTitleInput();
-    resetDescriptionInput();
-    resetAuthorInput();
-    resetImagePathInput();
-    navigate("/");
+    // resetTitleInput();
+    // resetDescriptionInput();
+    // resetAuthorInput();
+    // resetImagePathInput();
+    // navigate("/");
   };
 
   const cancelHandler = () => {
@@ -110,7 +132,7 @@ const BlogForm = ({
     <div key={id} className="row gx-5">
       <form onSubmit={handleForm} className="col-6">
         <div>
-          <h5>{error}</h5>
+          {!formIsValid && <h5>{error}</h5>}
           {/* <p>{error?.message}</p> */}
         </div>
         <Input
@@ -137,6 +159,11 @@ const BlogForm = ({
             onBlur={descriptionBlurHandler}
           ></textarea>
         </div>
+        <ImageUpload
+          id="image"
+          addImage={addImageHandler}
+          errorText="Please provide an image"
+        />
         <Input
           label="Author Name"
           input={{

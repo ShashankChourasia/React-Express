@@ -27,13 +27,13 @@ const BlogsList = ({ fullList = 3 }) => {
     }
   };
 
-  const truncateText= (text, maxLength) => {
+  const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + "...";
     } else {
       return text;
     }
-  }
+  };
 
   return (
     <section className="container py-5">
@@ -63,6 +63,13 @@ const BlogsList = ({ fullList = 3 }) => {
                       ? truncateText(post.description, 20)
                       : post.description}
                   </p>
+                   
+                  <img
+                    src={`http://localhost:8080/${post.image}`}
+                    style={{ width: "60px", height: "60px", borderRadius:'50px' }}
+                    className="img-fluid card-img-top"
+                    alt={post.author}
+                  />
                   <h4 className="card-title">{post.author}</h4>
                   <div className="d-flex justify-content-between align-items-center">
                     <em className="card-title">
@@ -100,7 +107,6 @@ const BlogsList = ({ fullList = 3 }) => {
 };
 
 export default BlogsList;
-
 
 // import React, { useReducer } from "react";
 // import { useSelector } from "react-redux";
@@ -213,4 +219,3 @@ export default BlogsList;
 // };
 
 // export default BlogsList;
-

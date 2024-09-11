@@ -46,7 +46,7 @@ const postSlice = createSlice({
 
       if (selectedOption === "Today") {
         state.filteredPosts = state?.posts?.filter(
-          (post) => post.dateCreated <= formattedDateToday
+          (post) => post.dateCreated >= formattedDateToday
         );
       } else if (selectedOption === "This Week") {
         state.filteredPosts = state.posts.filter(

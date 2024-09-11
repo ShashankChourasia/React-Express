@@ -10,12 +10,13 @@ const NewBlogPage = () => {
   const dispatch = useDispatch();
   const notification = useSelector((state) => state.ui.notification);
 
-  const handleAddPost = (title, description, author, imagePath) => {
+  const handleAddPost = (title, description, author, imagePath, image) => {
     const updatedPost = {
       title,
       description,
       author,
       imagePath,
+      image
       // dateCreated: `${date.getDate()}/${
       //   date.getMonth() + 1
       // }/${date.getFullYear()}`,

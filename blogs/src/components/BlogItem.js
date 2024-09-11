@@ -11,7 +11,7 @@ const BlogItem = ({ activeBlog }) => {
   if (!activeBlog) {
     return null; // or handle the loading state as needed
   }
-  const { id, title, description, dateCreated, author, imagePath } = activeBlog;
+  const { id, title, description, dateCreated, author, imagePath, image } = activeBlog;
 
   const handleDeletePost = () => {
     dispatch(deletePost(id));
@@ -46,7 +46,7 @@ const BlogItem = ({ activeBlog }) => {
         <ul className="list-group list-group-flush border-0">
           <li className="list-group-item border-0">
             <img
-              src={imagePath}
+              src={`http://localhost:8080/${image}`}
               style={{ width: "60px", height: "60px" }}
               className="rounded-circle"
               alt={author}

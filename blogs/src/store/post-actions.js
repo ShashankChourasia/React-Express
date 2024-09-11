@@ -60,15 +60,18 @@ export const updatePostData = (post) => {
     );
     try {
       console.log(token);
-      const {id, ...updatedPost}= post;
-      const response = await fetch(`http://localhost:8080/posts/edit-posts/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify(updatedPost),
-      });
+      const { id, ...updatedPost } = post;
+      const response = await fetch(
+        `http://localhost:8080/posts/edit-posts/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updatedPost),
+        }
+      );
 
       if (!response.ok) {
         throw Error("Could not fetch posts.");
@@ -104,14 +107,20 @@ export const createPost = (post) => {
       })
     );
     try {
-      console.log(token);
+      console.log(post);
+      const formData = new FormData();
+      formData.append("title", post.title);
+      formData.append("description", post.description);
+      formData.append("author", post.author);
+      formData.append("imagePath", post.imagePath);
+      formData.append("image", post.image);
+
       const response = await fetch("http://localhost:8080/posts/new-posts", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(post),
+        body: formData,
       });
 
       if (response.status !== 201) {
@@ -148,16 +157,13 @@ export const deletePost = (postId) => {
       })
     );
     try {
-      const response = await fetch(
-        "http://localhost:8080/posts/" + postId,
-        {
-          method: "Delete",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch("http://localhost:8080/posts/" + postId, {
+        method: "Delete",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.status !== 200) {
         throw Error("Could not delete post.");
