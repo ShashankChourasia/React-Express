@@ -1,0 +1,31 @@
+URL:  {
+  href: 'http://localhost:3000/api/auth/session',
+  origin: 'http://localhost:3000',
+  protocol: 'http:',
+  username: '',
+  password: '',
+  host: 'localhost:3000',
+  hostname: 'localhost',
+  port: '3000',
+  pathname: '/api/auth/session',
+  search: '',
+  searchParams: <ref *1> URLSearchParams {
+  [Symbol(query)]: [],
+  [Symbol(context)]: URL {
+  [Symbol(context)]: URLContext {
+  href: 'http://localhost:3000/api/auth/session',
+  protocol_end: 5,
+  username_end: 7,
+  host_start: 7,
+  host_end: 16,
+  pathname_start: 21,
+  search_start: 4294967295,
+  hash_start: 4294967295,
+  port: 3000,
+  scheme_type: 0
+},
+  [Symbol(query)]: [Circular *1]
+}
+},
+  hash: ''
+}

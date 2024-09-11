@@ -1,0 +1,74 @@
+HOST:  Headers {
+  [Symbol(headers list)]: HeadersList {
+  cookies: null,
+  [Symbol(headers map)]: Map(19) {
+  'accept' => { name: 'accept', value: '*/*' },
+  'accept-encoding' => { name: 'accept-encoding', value: 'gzip, deflate, br, zstd' },      
+  'accept-language' => { name: 'accept-language', value: 'en-GB,en-US;q=0.9,en;q=0.8' },   
+  'connection' => { name: 'connection', value: 'keep-alive' },
+  'content-type' => { name: 'content-type', value: 'application/json' },
+  'cookie' => {
+  name: 'cookie',
+  value: 'authjs.csrf-token=8f42d0c865149266bdbb531226a83e1cc721704fb18d254dc91404a6a802034d%7C360de154f30212747f02973e031b6bb597bd49819dc0475fecc02d9bbb2cc092; authjs.callback-url=http%3A%2F%2Flocalhost%3A3000%2F; authjs.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwia2lkIjoiYkxzTGRUSEhHZVZOaXRJTTdBTEFxZzhtNUk4dWNIdVhKbXk1RnZqSGlKS0NwVklxckoxb3RHSnhaWnJBZkJCYXlXUFhHZDlXdEhmUkNsOGFNWkNOV2cifQ..aNlUBIzrignNtGe327Xllw.r-ZYG8VJ2peN66bWL1IUwQZuKIfao01I_C8-qmJ0nAo5SSr1UwVFOG2dPDMEz35eJhtDxoVo8Sl4ucLo19cexrnrsCH8fZgZ-Io71LvbwZiojolDKpDKZuSJFpBPcozDg9GY5j1GIpW0rTSYp2D2cwJsgLEDkd94IYgpNHJ3cqpyg7EhJ9GmGExE4ZTaov1PNCAhN7vlEIaAHy-onBGfhP4Mfo9fRLOWb-PIAXovvyA.If1SLp361STng5cTZdMdRkRVNN3FLf_aNTSQwTJzqjc'
+},
+  'host' => { name: 'host', value: 'localhost:3000' },
+  'referer' => { name: 'referer', value: 'http://localhost:3000/' },
+  'sec-ch-ua' => {
+  name: 'sec-ch-ua',
+  value: '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"'
+},
+  'sec-ch-ua-mobile' => { name: 'sec-ch-ua-mobile', value: '?0' },
+  'sec-ch-ua-platform' => { name: 'sec-ch-ua-platform', value: '"Windows"' },
+  'sec-fetch-dest' => { name: 'sec-fetch-dest', value: 'empty' },
+  'sec-fetch-mode' => { name: 'sec-fetch-mode', value: 'cors' },
+  'sec-fetch-site' => { name: 'sec-fetch-site', value: 'same-origin' },
+  'user-agent' => {
+  name: 'user-agent',
+  value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+Chrome/126.0.0.0 Safari/537.36'
+},
+  'x-forwarded-for' => { name: 'x-forwarded-for', value: '::1' },
+  'x-forwarded-host' => { name: 'x-forwarded-host', value: 'localhost:3000' },
+  'x-forwarded-port' => { name: 'x-forwarded-port', value: '3000' },
+  'x-forwarded-proto' => { name: 'x-forwarded-proto', value: 'http' }
+},
+  [Symbol(headers map sorted)]: [
+  [ 'accept', '*/*' ],
+  [ 'accept-encoding', 'gzip, deflate, br, zstd' ],
+  [ 'accept-language', 'en-GB,en-US;q=0.9,en;q=0.8' ],
+  [ 'connection', 'keep-alive' ],
+  [ 'content-type', 'application/json' ],
+  [
+  'cookie',
+  'authjs.csrf-token=8f42d0c865149266bdbb531226a83e1cc721704fb18d254dc91404a6a802034d%7C360de154f30212747f02973e031b6bb597bd49819dc0475fecc02d9bbb2cc092; authjs.callback-url=http%3A%2F%2Flocalhost%3A3000%2F; authjs.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwia2lkIjoiYkxzTGRUSEhHZVZOaXRJTTdBTEFxZzhtNUk4dWNIdVhKbXk1RnZqSGlKS0NwVklxckoxb3RHSnhaWnJBZkJCYXlXUFhHZDlXdEhmUkNsOGFNWkNOV2cifQ..aNlUBIzrignNtGe327Xllw.r-ZYG8VJ2peN66bWL1IUwQZuKIfao01I_C8-qmJ0nAo5SSr1UwVFOG2dPDMEz35eJhtDxoVo8Sl4ucLo19cexrnrsCH8fZgZ-Io71LvbwZiojolDKpDKZuSJFpBPcozDg9GY5j1GIpW0rTSYp2D2cwJsgLEDkd94IYgpNHJ3cqpyg7EhJ9GmGExE4ZTaov1PNCAhN7vlEIaAHy-onBGfhP4Mfo9fRLOWb-PIAXovvyA.If1SLp361STng5cTZdMdRkRVNN3FLf_aNTSQwTJzqjc'
+],
+  [ 'host', 'localhost:3000' ],
+  [ 'referer', 'http://localhost:3000/' ],
+  [
+  'sec-ch-ua',
+  '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"'
+],
+  [ 'sec-ch-ua-mobile', '?0' ],
+  [ 'sec-ch-ua-platform', '"Windows"' ],
+  [ 'sec-fetch-dest', 'empty' ],
+  [ 'sec-fetch-mode', 'cors' ],
+  [ 'sec-fetch-site', 'same-origin' ],
+  [
+  'user-agent',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+],
+  [ 'x-forwarded-for', '::1' ],
+  [ 'x-forwarded-host', 'localhost:3000' ],
+  [ 'x-forwarded-port', '3000' ],
+  [ 'x-forwarded-proto', 'http' ]
+]
+},
+  [Symbol(guard)]: 'request',
+  [Symbol(realm)]: {
+  settingsObject: {
+  baseUrl: undefined,
+  origin: [Getter],
+  policyContainer: { referrerPolicy: 'strict-origin-when-cross-origin' }
+}
+}
+}
