@@ -1,0 +1,218 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 MERN Stack (MongoDB, Express.js, React, Node.js)\par
+\b 1. Node.js: Write a basic Node.js server that listens on port 3000 and returns a "Hello, World!" message when the root URL is accessed.\par
+\b0 const http = require('http'); \par
+const server = http.createServer((req, res) => \{ \par
+\tab res.writeHead(200, \{ 'Content-Type': 'text/plain' \}); res.end('Hello, World!'); \par
+\}); \par
+server.listen(3000, () => \{ console.log('Server listening on port 3000'); \});\par
+\par
+\par
+\b 2. Express.js: Create a simple REST API using Express.js with a single route /users that returns a JSON list of users.\par
+\b0 Ans. Check in Assignment>backend>app.js\par
+\b 3. React: Build a basic React component that fetches the list of users from the /users API route (from question 2) and displays them in a table.\par
+\b0 Ans. Check in Assignment>react-assignment>src>components>UsersList.jsx\b\par
+4. MongoDB: Create a MongoDB schema for storing user data (name, email, age), and write a script to insert a new user into the collection.\par
+\b0 Ans. Check in Assignment>backend>models>user.js\b\par
+5. Express.js + MongoDB: Create an Express.js route to fetch a user by their email from the MongoDB database.\par
+\b0 Ans. Check in Assignment>backend>app.js\b\par
+6. React + State Management: Build a form component in React that allows users to submit their name, email, and age. On submission, send the data to the backend API and update the state to display the new user.\par
+\b0 Ans. Check in Assignment>react-assignment>src>components>UserForm.jsx\b\par
+7. React Routing: Set up React Router in an application to navigate between a Home page and a Users page.\par
+\b0 Ans. Check in Assignment>react-assignment>src>App.js\b\par
+8. RESTful API Design: Design and implement a REST API in Express.js for a simple blog application with routes for creating, reading, updating, and deleting blog posts.\par
+Ans. \b0 Check blogs folder everything is there.\b\par
+\ul Docker\par
+\ulnone 9. Basic Dockerfile: Write a Dockerfile for a Node.js Express application that installs dependencies and runs the server on port 3000.\par
+\b0\par
+# Use the official Node.js image from the Docker Hub\par
+FROM node:18\par
+\par
+# Set the working directory in the container\par
+WORKDIR /app\par
+\par
+# Copy package.json and package-lock.json (if available)\par
+COPY package*.json ./\par
+\par
+# Install the dependencies\par
+RUN npm install\par
+\par
+# Copy the rest of the application files\par
+COPY . .\par
+\par
+# Expose port 3000 for the application\par
+EXPOSE 3000\par
+\par
+# Set environment variables (optional)\par
+ENV PORT=3000\par
+\par
+# Start the Node.js application\par
+CMD ["npm", "start"]\par
+\b 10. Docker Compose: Using Docker Compose, create a configuration file that sets up a multi-container application with a Node.js server and a MongoDB database.\par
+\b0 version: '3'\par
+\par
+services:\par
+  # MongoDB service\par
+  mongo:\par
+    image: mongo:latest\par
+    container_name: mongodb\par
+    ports:\par
+      - "27017:27017"\par
+    volumes:\par
+      - mongo-data:/data/db\par
+    environment:\par
+      MONGO_INITDB_ROOT_USERNAME: root\par
+      MONGO_INITDB_ROOT_PASSWORD: example\par
+\par
+  # Node.js service\par
+  node-app:\par
+    image: node:latest\par
+    container_name: node_app\par
+    working_dir: /app\par
+    volumes:\par
+      - ./app:/app\par
+    ports:\par
+      - "3000:3000"\par
+    depends_on:\par
+      - mongo\par
+    environment:\par
+      MONGO_URL: mongodb://root:example@mongo:27017/mydatabase?authSource=admin\par
+    command: bash -c "npm install && npm start"\par
+\par
+volumes:\par
+  mongo-data:\par
+\b 11. Docker Networking: Modify the Docker Compose configuration to ensure that the Node.js application can communicate with the MongoDB database via Docker networking.\par
+\b0\par
+version: '3.8'\par
+services:\par
+  nodejs-app:\par
+    image: node:14\par
+    container_name: nodejs-app\par
+    working_dir: /app\par
+    volumes:\par
+      - ./:/app\par
+    ports:\par
+      - "3000:3000"\par
+    command: npm start\par
+    networks:\par
+      - app-network\par
+    depends_on:\par
+      - mongodb\par
+\par
+  mongodb:\par
+    image: mongo:5\par
+    container_name: mongodb\par
+    ports:\par
+      - "27017:27017"\par
+    volumes:\par
+      - mongo-data:/data/db\par
+    networks:\par
+      - app-network\par
+\par
+networks:\par
+  app-network:\par
+    driver: bridge\par
+\par
+volumes:\par
+  mongo-data:\par
+\b 12. Containerization: Explain the advantages of using Docker for deploying a MERN Stack application and provide an example of a real-world use case where Docker enhances development workflows.\par
+\b0\par
+Docker enhances MERN stack development by providing:\par
+Environment Consistency: Containers bundle the app and its dependencies, solving the \ldblquote it works on my machine\rdblquote  issue, crucial for varied Node.js and MongoDB versions.\par
+Isolation & Security: MERN components (MongoDB, Express, React, Node.js) run in separate containers, improving security and manageability.\par
+Scalability: Docker enables easy horizontal scaling of the Node.js server or MongoDB without overhead.\par
+Version Control & Rollbacks: Docker images allow versioning and rollbacks, ensuring quick recovery if issues arise after deployments.\par
+Faster Development & Deployment: Docker Compose simplifies setting up environments, while CI/CD pipelines use Docker for rapid testing and deployment.\par
+Microservices Support: MERN components can be containerized individually, promoting modular development and easier updates.\par
+Real-World Use Case: In a MERN blogging platform, Docker ensures consistent local development, easy service scaling, seamless CI/CD pipelines, and safe data storage via Docker volumes, while orchestration tools like Kubernetes simplify large-scale production deployment.\par
+\ul\b GitHub/Bitbucket and Version Control\ulnone\par
+13. Basic Git Commands: Explain the steps and Git commands to initialize a repository, make a commit, and push the code to GitHub.\par
+\b0\tab Firstly we have to create a new folder. Then inside first we need to initialize that repo:\par
+\tab By using command : git init\par
+\tab Then add all files to stage by using command :: git add . \par
+\tab Then commit changes: git commit -m "Your commit message"\par
+If this is your first time pushing to GitHub, you need to link your local repository to a GitHub repository. First, create a new repository on GitHub we will get remote url of repo. Then we can type command like:\par
+git remote add origin \ldblquote URL to repository\rdblquote\par
+Then push changes Push your commits to the remote GitHub repository. Typically, you will push to main or master branch \par
+git push -u origin main\par
+git push -u origin master\par
+\par
+\b 14. Branching Strategy: Describe a common branching strategy (such as GitFlow or feature branching) used in software development teams and how you would implement it for a new feature.\par
+\b0\par
+1. Basically there are master (or main) branch: Contains the production-ready code. Only stable releases or hotfixes are merged into this branch. \par
+\par
+2. Develop branch: This branch contains the latest development work. It\rquote s where the next release candidate is developed and serves as an integration branch for features.\par
+\par
+Start a feature branch\par
+git checkout develop\par
+git pull origin develop\par
+git checkout -b feature/new-feature\par
+Then implement the new feature\par
+git add . \par
+git commit -m "New implementaion"\par
+Push the feature branch \par
+git push origin feature/new-feature\par
+Raise a PR once approved merge it to develop branch\par
+git checkout develop \par
+git merge feature/new-feature\par
+\par
+\b 15. Merging and Resolving Conflicts: Write a step-by-step guide to resolve a merge conflict when merging a feature branch into the main branch.\par
+\b0 Switch to th main branch\par
+git checkout main\par
+\par
+Fetch the latest changes \par
+git fetch origin \par
+git pull origin main\par
+\par
+\par
+\tab Start the merge\par
+\tab git merge feature-branch\par
+\tab If there are no conflicts, Git will automatically merge the changes. Otherwise identify the conflicts\par
+\tab git status\par
+\tab Resolve the conflicts mark the coflict resolved: git add <file_name> \par
+\tab And the commit and push the changes to complete merge.\par
+\par
+\b 16. CI/CD Integration: Explain how to set up a basic CI/CD pipeline using GitHub Actions to automatically test and deploy a Node.js application when changes are pushed to the repository.\par
+\b0\par
+Create a new repository in Github and push Nodejs project in it.\par
+\par
+Define a Github actions workflow. Create the file .github/workflows/ci-cd.yml in your project. This will contain the configuration for your pipeline.\par
+\par
+name: deploy-auth\par
+\par
+\par
+on:\par
+  push:\par
+    branches:\par
+      - main\par
+    paths:\par
+      - 'auth/**'\par
+\par
+\par
+jobs:\par
+  build:\par
+    runs-on: ubuntu-latest\par
+    steps:\par
+      - uses: actions/checkout@v3\par
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD\par
+        env:\par
+          DOCKER_USERNAME: $\{\{ secrets.DOCKER_USERNAME \}\}\par
+          DOCKER_PASSWORD: $\{\{ secrets.DOCKER_PASSWORD \}\}\par
+      - run: cd auth && docker build -t rallycoding/auth .\par
+      - run: docker push rallycoding/auth\par
+      - uses: digitalocean/action-doctl@v2\par
+        with:\par
+          token: $\{\{ secrets.DIGITALOCEAN_ACCESS_TOKEN \}\}\par
+      - run: doctl kubernetes cluster kubeconfig save ticketing\par
+      - run: kubectl rollout restart deployment auth-depl\par
+This pipeline runs whenever code is pushed to the main branch or a pull request is made to it.\par
+\par
+\par
+Python for Data Analysis\par
+Data Cleaning: Write a Python script that reads a CSV file using Pandas, drops rows with missing values, and outputs the cleaned data.\par
+Data Manipulation: Using Pandas, write a Python function that takes a DataFrame and returns the top 5 rows where a specific column (e.g., "age") has values greater than 30.\par
+Data Visualization: Create a bar chart using Matplotlib to visualize the distribution of user ages from a dataset.\par
+Descriptive Statistics: Using NumPy and Pandas, write a script that calculates the mean, median, and standard deviation of a column (e.g., "age") in a dataset.\par
+}
+ 

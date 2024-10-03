@@ -1,0 +1,52 @@
+/* Basic layout for the table container */
+.tableContainer {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tableTitle {
+  text-align: center;
+  font-size: 1.8rem;
+  font-family: "Arial", sans-serif;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Arial", sans-serif;
+}
+
+.usersTable th,
+.usersTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.usersTable th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.usersTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.loadingText {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.errorText {
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+}

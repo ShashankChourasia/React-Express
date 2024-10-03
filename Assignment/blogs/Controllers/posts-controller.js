@@ -5,6 +5,7 @@ const HttpError = require("../../Assignment/backend/models/http-error");
 const Post = require("../models/post");
 const User = require("../models/user");
 const { default: mongoose } = require("mongoose");
+const post = require("../models/post");
 
 const getAllPost = async (req, res, next) => {
   let posts;
@@ -58,8 +59,6 @@ const createPost = async (req, res, next) => {
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
-    await session.abortTransaction();
-    session.endSession();
     return next(new HttpError("Couldn't create post", 500));
   }
 
