@@ -8,6 +8,7 @@ import ServicesDetailPage from "./pages/ServicesDetail";
 import Root from "./layout/Root";
 import NewServicePage from "./pages/NewService";
 import NotFoundPage from "./pages/NotFound";
+import FolderStructurePage from "./pages/FolderStructure";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         path: "/services/:id",
         element: <ServicesDetailPage />,
       },
+      {
+        path: "/folder",
+        element: <FolderStructurePage/>,
+      },
     ],
   },
 ]);
@@ -34,9 +39,9 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchServiceData());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchServiceData());
+  // }, [dispatch]);
 
   return <RouterProvider router={router} />;
 }
