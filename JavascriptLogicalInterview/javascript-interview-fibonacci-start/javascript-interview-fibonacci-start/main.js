@@ -1,13 +1,6 @@
 // Design a function which returns a fibonacci sequence value
 // The Fibonacci sequence is the integer sequence where the first two terms are 0 and 1. After that, the next term is defined as the sum of the previous two terms. Hence, the nth term is the sum of (n-1)th term and (n-2)th term.
 // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144;
-
-// will get single number
-// const fibonacci = (n) => {
-//   if (n < 2) return 1;
-//   else return fibonacci(n - 2) + fibonacci(n - 1);
-// };
-
 //full fibonacci series
 const fibonacci = (n) => {
   // if(n<2) return [0,1]
@@ -19,5 +12,24 @@ const fibonacci = (n) => {
     [0, 1]
   );
 };
-
 console.log(fibonacci(1));
+const fibonacciSequence = (n) => {
+  if (n <= 0) return [];
+
+  const result = [0];
+
+  if (n > 1) result.push(1);
+
+  for (let i = 2; i < n; i++) {
+    result.push(result[i - 1] + result[i - 2]);
+  }
+
+  return result;
+};
+
+console.log(fibonacciSequence(5));
+// will get single number
+// const fibonacci = (n) => {
+//   if (n < 2) return 1;
+//   else return fibonacci(n - 2) + fibonacci(n - 1);
+// };
