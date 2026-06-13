@@ -1,0 +1,9 @@
+{
+    "env": {
+        "MONGO_USER": "your_mongo_user",
+        "MONGO_PASSWORD": "your_mongo_password",
+        "MONGO_DEFAULT_DATABASE": "shop",
+        "STRIPE_KEY": "REPLACE_WITH_STRIPE_KEY",
+        "SENDGRID_API_KEY": "REPLACE_WITH_SENDGRID_API_KEY"
+    }
+}

@@ -36,10 +36,13 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://shashankchourasia1706:9bivZexGyodpwdKT@cluster0.7dp9klx.mongodb.net/posts?retryWrites=true&w=majority"
+    "mongodb+srv://shashankchourasia1706:UcHbdYlAyOsLko5r@cluster0.7dp9klx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   )
   .then(() => {
-    app.listen(8080);
+    // app.listen(8080);
+    app.listen(3000, "0.0.0.0", () => {
+      console.log("Server running on http://0.0.0.0:3000");
+    });
     console.log("Connected");
   })
   .catch((err) => {

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { validationResult } = require("express-validator");
-const HttpError = require("../../Assignment/backend/models/http-error");
+const HttpError = require("../models/http-error");
 
 const Post = require("../models/post");
 const User = require("../models/user");
