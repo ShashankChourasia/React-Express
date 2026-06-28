@@ -37,11 +37,10 @@ const isAnagram = (str1, str2) => {
 //    }
 //    return true;
 // }
-
-console.log(isAnagram("listen", "silent")); // true
-console.log(isAnagram("aab", "aba"));       // true
-console.log(isAnagram("aa", "ab"));         // false
-console.log(isAnagram("abc", "abd"));       // false
+// console.log(isAnagram("listen", "silent")); // true
+// console.log(isAnagram("aab", "aba"));       // true
+// console.log(isAnagram("aa", "ab"));         // false
+// console.log(isAnagram("abc", "abd"));       // false
 
 // console.log(isAnagram("listen", "silent"));
 
