@@ -19,6 +19,30 @@ const isAnagram = (str1, str2) => {
 
   return sortedStr1 === sortedStr2;
 };
+
+//  function isAnagram(s, t){
+//    if(s.length !== t.length) return false;
+//    const arr= t.split("");
+   
+//    for(let i=0; i<s.length; i++){
+//        let found= false;
+//        for(let j=0; j<arr.length; j++){
+//           if(s[i]===arr[j]) {
+//             arr[j]= "*";
+//            found=true;
+//            break;
+//           }
+//        }
+//        if(!found) {return false};
+//    }
+//    return true;
+// }
+
+console.log(isAnagram("listen", "silent")); // true
+console.log(isAnagram("aab", "aba"));       // true
+console.log(isAnagram("aa", "ab"));         // false
+console.log(isAnagram("abc", "abd"));       // false
+
 // console.log(isAnagram("listen", "silent"));
 
 // console.log(isAnagram("rail safety", "fairy tales"));
